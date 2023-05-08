@@ -1,6 +1,8 @@
 package gp.assessments.chat;
 
-import gp.assessments.chat.common.enums.CommandMapper;
+import gp.assessments.chat.common.enums.CommandType;
+import gp.assessments.chat.common.factory.CommandFactory;
+import gp.assessments.chat.common.model.CommandMapperModel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 
@@ -13,7 +15,7 @@ public class CommandDecoder extends MessageToMessageDecoder<String> {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, String msg, List<Object> out) throws Exception {
-        CommandMapper commandMapper;
+        CommandType commandType;
         String[] commandParams;
 
         if (msg.startsWith("/")) {
@@ -21,20 +23,20 @@ public class CommandDecoder extends MessageToMessageDecoder<String> {
             String commandName = parts[0];
             commandParams = parts.length > 1 ? Arrays.copyOfRange(parts, 1, parts.length) : new String[0];
 
-            Optional<CommandMapper> commandMapperOpt = CommandMapper.getByCommandName(commandName);
-            if (commandMapperOpt.isPresent()) {
-                commandMapper = commandMapperOpt.get();
+            Optional<CommandType> commandTypeOpt = CommandType.getByCommandName(commandName);
+            if (commandTypeOpt.isPresent()) {
+                commandType = commandTypeOpt.get();
             } else {
                 throw new InvalidObjectException("Invalid command: " + commandName);
             }
         } else {
-            commandMapper = CommandMapper.MESSAGE_COMMAND;
+            commandType = CommandType.MESSAGE_COMMAND;
             commandParams = new String[]{msg};
         }
 
-        commandMapper.getCommand().init(commandParams);
+        CommandMapperModel model = new CommandFactory().getCommandMapperModel(commandType, commandParams);
 
-        out.add(commandMapper);
+        out.add(model);
     }
 
 }
