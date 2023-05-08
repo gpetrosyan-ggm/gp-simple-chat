@@ -1,29 +1,15 @@
 package gp.assessments.chat;
 
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
+import gp.assessments.chat.common.enums.CommandMapper;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 
-public class ChatHandler extends ChannelInboundHandlerAdapter {
+public class ChatHandler extends SimpleChannelInboundHandler<CommandMapper> {
 
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        String in = (String) msg;
-        System.out.println("Server received: " + in);
-        ctx.write(in);
-    }
 
     @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
-           .addListener(ChannelFutureListener.CLOSE);
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
-        ctx.close();
+    protected void channelRead0(ChannelHandlerContext ctx, CommandMapper commandMapper) throws Exception {
+        commandMapper.getCommandHandler().handle(ctx, commandMapper.getCommand());
     }
 
 }

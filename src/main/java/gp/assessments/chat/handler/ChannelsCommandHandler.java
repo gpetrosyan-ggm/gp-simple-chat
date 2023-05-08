@@ -1,4 +1,13 @@
 package gp.assessments.chat.handler;
 
-public class ChannelsCommandHandler implements CommandHandler {
+import gp.assessments.chat.command.ChannelsCommand;
+import io.netty.channel.ChannelHandlerContext;
+
+public class ChannelsCommandHandler implements CommandHandler<ChannelsCommand> {
+
+    @Override
+    public void handle(ChannelHandlerContext ctx, ChannelsCommand command) {
+        System.out.println("Into channels command");
+    }
+
 }

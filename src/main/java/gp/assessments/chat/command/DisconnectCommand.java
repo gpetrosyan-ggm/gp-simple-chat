@@ -1,4 +1,4 @@
 package gp.assessments.chat.command;
 
-public class DisconnectCommand implements Command{
+public class DisconnectCommand implements Command {
 }
