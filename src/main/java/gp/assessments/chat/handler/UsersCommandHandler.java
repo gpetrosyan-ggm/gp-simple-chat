@@ -7,7 +7,10 @@ public class UsersCommandHandler implements CommandHandler<UsersCommand> {
 
     @Override
     public void handle(ChannelHandlerContext ctx, UsersCommand command) {
-        System.out.println("Into users command");
+
+        // TODO check if user logged in or not, if not - send error message
+        // TODO Send list of unique users in current channel.
+
     }
 
 }

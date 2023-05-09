@@ -7,7 +7,10 @@ public class MessageCommandHandler implements CommandHandler<MessageCommand> {
 
     @Override
     public void handle(ChannelHandlerContext ctx, MessageCommand command) {
-        System.out.println("Into message command");
+
+        // TODO check if user logged in or not, if not - send error message
+        // TODO send message to current channel's all connected users
+
     }
 
 }

@@ -7,7 +7,10 @@ public class ChannelsCommandHandler implements CommandHandler<ChannelsCommand> {
 
     @Override
     public void handle(ChannelHandlerContext ctx, ChannelsCommand command) {
-        System.out.println("Into channels command");
+
+        // TODO check if user logged in or not, if not - send error message
+        // TODO Send list of channels.
+
     }
 
 }

@@ -7,7 +7,10 @@ public class LeaveCommandHandler implements CommandHandler<LeaveCommand> {
 
     @Override
     public void handle(ChannelHandlerContext ctx, LeaveCommand command) {
-        System.out.println("Into leave command");
+
+        // TODO check if user logged in or not, if not - send error message
+        // TODO Leave current channel.
+
     }
 
 }

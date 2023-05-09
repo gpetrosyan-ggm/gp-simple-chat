@@ -7,7 +7,10 @@ public class DisconnectCommandHandler implements CommandHandler<DisconnectComman
 
     @Override
     public void handle(ChannelHandlerContext ctx, DisconnectCommand command) {
-        System.out.println("Into disconnect command");
+
+        // TODO check if user logged in or not, if not - send error message
+        // TODO Close connection to server.
+
     }
 
 }
