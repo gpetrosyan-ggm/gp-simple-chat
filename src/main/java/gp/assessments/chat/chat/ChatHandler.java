@@ -13,4 +13,9 @@ public class ChatHandler extends SimpleChannelInboundHandler<CommandMapperModel>
         model.getCommandHandler().handle(ctx, model.getCommand());
     }
 
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        ctx.writeAndFlush(String.format("Error: %s\r\n", cause.getMessage()));
+    }
+
 }
