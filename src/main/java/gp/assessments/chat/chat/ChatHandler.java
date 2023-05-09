@@ -1,6 +1,5 @@
 package gp.assessments.chat.chat;
 
-import gp.assessments.chat.service.AuthService;
 import gp.assessments.chat.common.model.CommandMapperModel;
 import gp.assessments.chat.service.ChatService;
 import io.netty.channel.ChannelHandlerContext;

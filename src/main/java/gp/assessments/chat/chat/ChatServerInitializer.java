@@ -1,8 +1,6 @@
 package gp.assessments.chat.chat;
 
-import gp.assessments.chat.service.AuthService;
 import gp.assessments.chat.service.ChatService;
-import gp.assessments.chat.service.impl.AuthServiceImpl;
 import gp.assessments.chat.service.impl.ChatServiceImpl;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -14,8 +12,7 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-        AuthService authService = new AuthServiceImpl();
-        ChatService chatService = new ChatServiceImpl(authService);
+        ChatService chatService = new ChatServiceImpl();
 
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new StringDecoder());
