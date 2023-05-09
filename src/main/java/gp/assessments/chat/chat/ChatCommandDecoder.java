@@ -1,4 +1,4 @@
-package gp.assessments.chat;
+package gp.assessments.chat.chat;
 
 import gp.assessments.chat.common.enums.CommandType;
 import gp.assessments.chat.common.factory.CommandFactory;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class CommandDecoder extends MessageToMessageDecoder<String> {
+public class ChatCommandDecoder extends MessageToMessageDecoder<String> {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, String msg, List<Object> out) throws Exception {

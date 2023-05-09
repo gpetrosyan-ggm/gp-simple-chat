@@ -1,4 +1,4 @@
-package gp.assessments.chat;
+package gp.assessments.chat.chat;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -13,7 +13,7 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new StringDecoder());
         pipeline.addLast(new StringEncoder());
-        pipeline.addLast(new CommandDecoder());
+        pipeline.addLast(new ChatCommandDecoder());
         pipeline.addLast(new ChatHandler());
     }
 

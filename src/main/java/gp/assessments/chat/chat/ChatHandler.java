@@ -1,4 +1,4 @@
-package gp.assessments.chat;
+package gp.assessments.chat.chat;
 
 import gp.assessments.chat.common.model.CommandMapperModel;
 import io.netty.channel.ChannelHandlerContext;
