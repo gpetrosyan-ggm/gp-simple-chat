@@ -9,9 +9,12 @@ import java.time.LocalDateTime;
 @Setter
 public class ChatMessageEntity {
 
-    private String senderName;
+    private String id;
     private String message;
-    private String channelName;
     private LocalDateTime sentDate;
+
+    // Relations corresponding to UserEntity and ChatChannelEntity
+    private String senderName;
+    private String channelName;
 
 }

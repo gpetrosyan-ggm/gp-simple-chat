@@ -9,7 +9,10 @@ import java.util.List;
 @Setter
 public class ChatChannelEntity {
 
+    private String id;
     private String channelName;
+
+    // Relations corresponding to UserEntity and ChatMessageEntity
     private List<UserEntity> users;
     private List<ChatMessageEntity> messages;
 
