@@ -24,7 +24,8 @@ public class UserStorageImpl implements UserStorage {
 
     @Override
     public UserEntity save(final UserEntity user) {
-        return usersMap.put(user.getUserName(), user);
+        usersMap.put(user.getUserName(), user);
+        return usersMap.get(user.getUserName());
     }
 
     private static class LoadUserStorage {
