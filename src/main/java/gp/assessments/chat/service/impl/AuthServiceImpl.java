@@ -1,6 +1,6 @@
-package gp.assessments.chat.auth.impl;
+package gp.assessments.chat.service.impl;
 
-import gp.assessments.chat.auth.AuthService;
+import gp.assessments.chat.service.AuthService;
 import gp.assessments.chat.common.entity.UserEntity;
 
 import java.util.Objects;

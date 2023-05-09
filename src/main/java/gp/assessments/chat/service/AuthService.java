@@ -1,4 +1,4 @@
-package gp.assessments.chat.auth;
+package gp.assessments.chat.service;
 
 public interface AuthService {
 
