@@ -3,6 +3,7 @@ package gp.assessments.chat.chat;
 import gp.assessments.chat.common.enums.CommandType;
 import gp.assessments.chat.common.factory.CommandFactory;
 import gp.assessments.chat.common.model.CommandMapperModel;
+import gp.assessments.chat.storage.impl.TokenStorageImpl;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 
@@ -13,6 +14,8 @@ import java.util.Optional;
 
 public class ChatCommandDecoder extends MessageToMessageDecoder<String> {
 
+    private static final boolean ENABLE_TOKEN_VALIDATION = false;
+
     @Override
     protected void decode(ChannelHandlerContext ctx, String msg, List<Object> out) throws Exception {
         CommandType commandType;
@@ -21,13 +24,26 @@ public class ChatCommandDecoder extends MessageToMessageDecoder<String> {
         if (msg.startsWith("/")) {
             String[] parts = msg.trim().split("\\s");
             String commandName = parts[0];
-            commandParams = parts.length > 1 ? Arrays.copyOfRange(parts, 1, parts.length) : new String[0];
 
             Optional<CommandType> commandTypeOpt = CommandType.getByCommandName(commandName);
             if (commandTypeOpt.isPresent()) {
                 commandType = commandTypeOpt.get();
             } else {
                 throw new InvalidObjectException("Invalid command: " + commandName);
+            }
+
+            if (ENABLE_TOKEN_VALIDATION && CommandType.LOGIN_COMMAND != commandType) {
+                if (parts.length < 2) {
+                    throw new RuntimeException("Token not exists");
+                }
+
+                if (!TokenStorageImpl.getInstance().existByToken(parts[1])) {
+                    throw new RuntimeException("Invalid token");
+                }
+
+                commandParams = parts.length > 2 ? Arrays.copyOfRange(parts, 2, parts.length) : new String[0];
+            } else {
+                commandParams = parts.length > 1 ? Arrays.copyOfRange(parts, 1, parts.length) : new String[0];
             }
         } else {
             commandType = CommandType.MESSAGE_COMMAND;
