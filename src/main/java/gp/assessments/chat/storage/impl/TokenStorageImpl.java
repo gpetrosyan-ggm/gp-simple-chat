@@ -21,8 +21,8 @@ public class TokenStorageImpl implements TokenStorage {
     }
 
     @Override
-    public boolean save(final String token) {
-        return tokens.add(token);
+    public void save(final String token) {
+        tokens.add(token);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface ChatChannelStorage {
 
-    boolean removeFromChannel(Channel channel, final String channelName, String userName);
+    void removeFromChannel(Channel channel, final String channelName, String userName);
 
     void addToChannel(Channel channel, String channelName, String userName);
 

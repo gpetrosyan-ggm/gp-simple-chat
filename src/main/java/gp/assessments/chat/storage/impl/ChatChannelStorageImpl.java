@@ -26,12 +26,11 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
     }
 
     @Override
-    public boolean removeFromChannel(final Channel channel, final String channelName, final String userName) {
+    public void removeFromChannel(final Channel channel, final String channelName, final String userName) {
         ChatChannelModel chatChannelModel = chatChannelsMap.get(channelName);
         if (Objects.nonNull(chatChannelModel) && chatChannelModel.getUsers().remove(userName)) {
-            return chatChannelModel.getGroup().remove(channel);
+            chatChannelModel.getGroup().remove(channel);
         }
-        return false;
     }
 
     @Override

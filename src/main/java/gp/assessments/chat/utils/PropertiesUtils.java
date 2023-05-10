@@ -17,4 +17,8 @@ public final class PropertiesUtils {
         return Integer.parseInt(bundle.getString(propertyName));
     }
 
+    public static boolean getAsBoolean(String propertyName) {
+        return Boolean.getBoolean(bundle.getString(propertyName));
+    }
+
 }

@@ -13,8 +13,6 @@ public class ChatMessageEntity {
     private String id;
     private String message;
     private LocalDateTime sentDate;
-
-    // Relations corresponding to UserEntity and ChatChannelEntity
     private String senderName;
     private String channelName;
 
