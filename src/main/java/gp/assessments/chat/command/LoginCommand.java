@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class LoginCommand implements Command {
-    private String name;
+    private String userName;
     private String password;
 
     @Override
@@ -12,7 +12,7 @@ public class LoginCommand implements Command {
         if (params.length != 2) {
             throw new RuntimeException("Invalid login params");
         }
-        this.name = params[0];
+        this.userName = params[0];
         this.password = params[1];
     }
 

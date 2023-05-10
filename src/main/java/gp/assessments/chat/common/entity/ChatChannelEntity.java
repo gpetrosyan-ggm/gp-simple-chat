@@ -3,17 +3,20 @@ package gp.assessments.chat.common.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class ChatChannelEntity {
 
-    private String id;
+    private final String id;
     private String channelName;
+    private long channelLimit;
 
-    // Relations corresponding to UserEntity and ChatMessageEntity
-    private List<UserEntity> users;
-    private List<ChatMessageEntity> messages;
+    public ChatChannelEntity(String channelName, long channelLimit) {
+        this.id = UUID.randomUUID().toString();
+        this.channelName = channelName;
+        this.channelLimit = channelLimit;
+    }
 
 }
