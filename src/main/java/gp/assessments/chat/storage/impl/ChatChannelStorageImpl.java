@@ -9,8 +9,11 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.ImmediateEventExecutor;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class ChatChannelStorageImpl implements ChatChannelStorage {
 
@@ -62,6 +65,15 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
 
         chatChannelModel.getMessages().add(new ChatMessageEntity(message, userName, channelName));
         chatChannelModel.getGroup().writeAndFlush(String.format("[%s]: %s", userName, message));
+    }
+
+    @Override
+    public Set<String> getChannelUsers(final String channelName) {
+        ChatChannelModel chatChannelModel = chatChannelsMap.get(channelName);
+        if (Objects.nonNull(chatChannelModel)) {
+            return new HashSet<>(chatChannelModel.getUsers());
+        }
+        return new HashSet<>();
     }
 
     private static class LoadChatStorage {
