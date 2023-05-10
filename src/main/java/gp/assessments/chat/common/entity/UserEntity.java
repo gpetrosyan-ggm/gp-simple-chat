@@ -24,4 +24,8 @@ public class UserEntity {
         online.compareAndSet(false, true);
     }
 
+    public void makeOffline() {
+        online.compareAndSet(true, false);
+    }
+
 }

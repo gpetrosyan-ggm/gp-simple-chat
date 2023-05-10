@@ -25,6 +25,11 @@ public class TokenStorageImpl implements TokenStorage {
         return tokens.add(token);
     }
 
+    @Override
+    public void remove(String token) {
+        tokens.remove(token);
+    }
+
     private static class LoadTokenStorage {
         static final TokenStorage INSTANCE = new TokenStorageImpl();
     }

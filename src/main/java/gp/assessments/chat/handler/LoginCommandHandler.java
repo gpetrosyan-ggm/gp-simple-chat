@@ -12,7 +12,7 @@ public class LoginCommandHandler implements CommandHandler<LoginCommand> {
     @Override
     public void handle(ChannelHandlerContext ctx, LoginCommand command) {
         String token = new AuthenticationManager().authenticate(command.getUserName(), command.getPassword());
-        TokenStorageImpl.getInstance().save(token);
+        CommandUtils.setAttributeByName(ctx, Constants.TOKEN_ATTR_NAME, token);
         CommandUtils.setAttributeByName(ctx, Constants.USER_NAME_ATTR_NAME, command.getUserName());
         ctx.writeAndFlush(String.format("Successfully logged in. Your token is: %s%s", token, "\r\n"));
 

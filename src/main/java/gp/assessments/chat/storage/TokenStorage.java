@@ -6,4 +6,6 @@ public interface TokenStorage {
 
     boolean save(final String token);
 
+    void remove(String token);
+
 }
