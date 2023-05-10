@@ -14,4 +14,6 @@ public interface ChatChannelStorage {
 
     Set<String> getChannelUsers(final String channelName);
 
+    Set<String> getChannel();
+
 }

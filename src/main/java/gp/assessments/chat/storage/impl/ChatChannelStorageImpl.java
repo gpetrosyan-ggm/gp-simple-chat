@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 public class ChatChannelStorageImpl implements ChatChannelStorage {
 
@@ -74,6 +73,11 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
             return new HashSet<>(chatChannelModel.getUsers());
         }
         return new HashSet<>();
+    }
+
+    @Override
+    public Set<String> getChannel() {
+        return new HashSet<>(chatChannelsMap.keySet());
     }
 
     private static class LoadChatStorage {
