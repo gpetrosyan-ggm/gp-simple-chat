@@ -1,6 +1,7 @@
 package gp.assessments.chat.handler;
 
 import gp.assessments.chat.command.JoinCommand;
+import gp.assessments.chat.common.error.UserAlreadyJoinedChannelException;
 import gp.assessments.chat.storage.impl.ChatChannelStorageImpl;
 import gp.assessments.chat.utils.CommandUtils;
 import gp.assessments.chat.utils.Constants;
@@ -22,7 +23,8 @@ public class JoinCommandHandler implements CommandHandler<JoinCommand> {
         if (joinedChannelNameOpt.isPresent()) {
             String joinedChannelName = joinedChannelNameOpt.get();
             if (joinedChannelName.equals(command.getChannelName())) {
-                throw new RuntimeException("User already joined this channel");
+                throw new UserAlreadyJoinedChannelException(String.format("User already joined the '%s' channel",
+                                                                          joinedChannelName));
             }
 
             ChatChannelStorageImpl.getInstance().removeFromChannel(ctx.channel(), joinedChannelName, userName);

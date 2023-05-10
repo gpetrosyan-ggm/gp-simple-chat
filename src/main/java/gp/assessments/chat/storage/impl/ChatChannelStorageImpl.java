@@ -2,6 +2,7 @@ package gp.assessments.chat.storage.impl;
 
 import gp.assessments.chat.common.entity.ChatChannelEntity;
 import gp.assessments.chat.common.entity.ChatMessageEntity;
+import gp.assessments.chat.common.error.InvalidChannelNameException;
 import gp.assessments.chat.common.model.ChatChannelModel;
 import gp.assessments.chat.storage.ChatChannelStorage;
 import io.netty.channel.Channel;
@@ -58,7 +59,8 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
     public void addMessageToChannel(final String channelName, final String userName, final String message) {
         ChatChannelModel chatChannelModel = chatChannelsMap.get(channelName);
         if (Objects.isNull(chatChannelModel)) {
-            throw new RuntimeException("Invalid channel name");
+            throw new InvalidChannelNameException(String.format("Could not find the channel '%s' in the storage",
+                                                                channelName));
         }
 
         chatChannelModel.getMessages().add(new ChatMessageEntity(message, userName, channelName));

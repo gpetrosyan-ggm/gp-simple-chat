@@ -1,6 +1,7 @@
 package gp.assessments.chat.security;
 
 import gp.assessments.chat.common.entity.UserEntity;
+import gp.assessments.chat.common.error.UserIncorrectPasswordException;
 import gp.assessments.chat.storage.impl.TokenStorageImpl;
 import gp.assessments.chat.storage.impl.UserStorageImpl;
 import org.slf4j.Logger;
@@ -12,13 +13,6 @@ public class AuthenticationManager {
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationManager.class);
 
     public String authenticate(String userName, String password) {
-        if (userName.isBlank()) {
-            throw new IllegalArgumentException("invalid user");
-        }
-        if (password.isBlank()) {
-            throw new IllegalArgumentException("invalid password");
-        }
-
         logger.info("The user '{}' is logging in.", userName);
         Optional<UserEntity> userOpt = UserStorageImpl.getInstance().findByUserName(userName);
 
@@ -30,7 +24,7 @@ public class AuthenticationManager {
             user = userOpt.get();
 
             if (!user.getPassword().equals(password)) {
-                throw new IllegalArgumentException("incorrect password");
+                throw new UserIncorrectPasswordException("User inputted incorrect password");
             }
         }
         user.makeOnline();

@@ -1,5 +1,6 @@
 package gp.assessments.chat.utils;
 
+import gp.assessments.chat.common.error.InvalidChannelAttributeNameException;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 
@@ -16,8 +17,10 @@ public final class CommandUtils {
     }
 
     public static String getAttributeByNameWithException(ChannelHandlerContext ctx, String attrName) {
-        return getAttributeByName(ctx, attrName).orElseThrow(() -> new RuntimeException(
-                "Invalid attribute: " + attrName));
+        return getAttributeByName(ctx, attrName)
+                .orElseThrow(() -> new InvalidChannelAttributeNameException(String.format(
+                        "Invalid attribute name: %s",
+                        attrName)));
     }
 
     public static void setAttributeByName(ChannelHandlerContext ctx, String attrName, String attrValue) {
