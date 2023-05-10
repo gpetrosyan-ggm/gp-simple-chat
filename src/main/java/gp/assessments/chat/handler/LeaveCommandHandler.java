@@ -21,7 +21,7 @@ public class LeaveCommandHandler implements CommandHandler<LeaveCommand> {
         ChatChannelStorageImpl.getInstance().removeFromChannel(ctx.channel(), channelName, userName);
         CommandUtils.setAttributeByName(ctx, Constants.CHANNEL_NAME_ATTR_NAME, null);
 
-        logger.info("The '{}' user successfully left the '{}' channel.", userName,channelName);
+        logger.info("The '{}' user successfully left the '{}' channel.", userName, channelName);
         ctx.writeAndFlush(PropertiesUtils.getAsString("leave.command.success") + "\r\n");
     }
 

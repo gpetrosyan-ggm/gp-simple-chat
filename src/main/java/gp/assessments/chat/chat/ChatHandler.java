@@ -1,6 +1,5 @@
 package gp.assessments.chat.chat;
 
-import gp.assessments.chat.ChatApplication;
 import gp.assessments.chat.common.error.SimpleChatBaseException;
 import gp.assessments.chat.common.model.CommandMapperModel;
 import gp.assessments.chat.utils.PropertiesUtils;

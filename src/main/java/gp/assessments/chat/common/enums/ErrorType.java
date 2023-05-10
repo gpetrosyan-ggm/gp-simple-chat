@@ -14,14 +14,13 @@ public enum ErrorType {
     USER_INCORRECT_PASSWORD(1009, "user.incorrect.password.message"),
     USER_LIMIT_EXCEEDED(1010, "user.limit.exceeded.message");
 
+    private final int errorCode;
+    private final String errorCodeProp;
+
     ErrorType(int errorCode, String errorCodeProp) {
         this.errorCode = errorCode;
         this.errorCodeProp = errorCodeProp;
     }
-
-    private final int errorCode;
-
-    private final String errorCodeProp;
 
     public int getErrorCode() {
         return errorCode;

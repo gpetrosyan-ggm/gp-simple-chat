@@ -11,8 +11,8 @@ public class UserEntity {
     private final String id;
     private final String userName;
     private final String password;
-    private String lastChannelName;
     private final AtomicBoolean online;
+    private String lastChannelName;
 
     public UserEntity(String userName, String password) {
         this.id = UUID.randomUUID().toString();
