@@ -33,7 +33,7 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
     }
 
     @Override
-    public void addToChannel(Channel channel, String channelName, String userName) {
+    public void addToChannel(final Channel channel, final String channelName, final String userName) {
         chatChannelsMap.putIfAbsent(channelName,
                                     new ChatChannelModel(new ChatChannelEntity(channelName, 10),
                                                          new DefaultChannelGroup(ImmediateEventExecutor.INSTANCE)));
@@ -51,6 +51,17 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
 
             chatChannelModel.getGroup().add(channel);
         }
+    }
+
+    @Override
+    public void addMessageToChannel(final String channelName, final String userName, final String message) {
+        ChatChannelModel chatChannelModel = chatChannelsMap.get(channelName);
+        if (Objects.isNull(chatChannelModel)) {
+            throw new RuntimeException("Invalid channel name");
+        }
+
+        chatChannelModel.getMessages().add(new ChatMessageEntity(message, userName, channelName));
+        chatChannelModel.getGroup().writeAndFlush(String.format("[%s]: %s", userName, message));
     }
 
     private static class LoadChatStorage {

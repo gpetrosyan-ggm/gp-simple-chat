@@ -8,4 +8,6 @@ public interface ChatChannelStorage {
 
     void addToChannel(Channel channel, String channelName, String userName);
 
+    void addMessageToChannel(String channelName, String userName, String message);
+
 }
