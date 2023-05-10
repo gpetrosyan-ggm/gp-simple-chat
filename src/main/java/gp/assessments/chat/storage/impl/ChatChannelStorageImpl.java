@@ -11,10 +11,8 @@ import io.netty.channel.Channel;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.ImmediateEventExecutor;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatChannelStorageImpl implements ChatChannelStorage {
@@ -94,8 +92,10 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
     }
 
     private String createMessageStr(ChatMessageEntity message) {
-        return String.format("[%s][%s]: %s%s",
-                             message.getSentDate(),
+        return String.format("[%s] [%s]: %s%s",
+                             message.getSentDate()
+                                    .format(DateTimeFormatter.ofPattern(PropertiesUtils.getAsString(
+                                            "message.date.pattern"))),
                              message.getSenderName(),
                              message.getMessage(),
                              "\r\n");
