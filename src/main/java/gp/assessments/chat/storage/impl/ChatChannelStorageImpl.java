@@ -5,6 +5,7 @@ import gp.assessments.chat.common.entity.ChatMessageEntity;
 import gp.assessments.chat.common.error.InvalidChannelNameException;
 import gp.assessments.chat.common.model.ChatChannelModel;
 import gp.assessments.chat.storage.ChatChannelStorage;
+import gp.assessments.chat.utils.PropertiesUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.ImmediateEventExecutor;
@@ -45,7 +46,7 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
 
             chatChannelModel.getMessages().stream()
                             .sorted(Comparator.comparing(ChatMessageEntity::getSentDate).reversed())
-                            .limit(10)
+                            .limit(PropertiesUtils.getAsInt("channel.messages.limit.size"))
                             .forEach(message -> channel.write(String.format("[%s]: %s",
                                                                             message.getSenderName(),
                                                                             message.getMessage())));

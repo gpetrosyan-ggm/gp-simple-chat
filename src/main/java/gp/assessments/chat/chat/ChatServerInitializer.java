@@ -1,5 +1,6 @@
 package gp.assessments.chat.chat;
 
+import gp.assessments.chat.utils.PropertiesUtils;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -13,7 +14,8 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
-        ch.pipeline().addLast(new DelimiterBasedFrameDecoder(4096, Delimiters.lineDelimiter()));
+        pipeline.addLast(new DelimiterBasedFrameDecoder(PropertiesUtils.getAsInt("decoded.frame.max.length"),
+                                                        Delimiters.lineDelimiter()));
         pipeline.addLast(new StringDecoder());
         pipeline.addLast(new StringEncoder());
         pipeline.addLast(new ChatCommandDecoder());
