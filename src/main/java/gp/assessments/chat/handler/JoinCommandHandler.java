@@ -1,7 +1,6 @@
 package gp.assessments.chat.handler;
 
 import gp.assessments.chat.command.JoinCommand;
-import gp.assessments.chat.common.entity.ChatChannelEntity;
 import gp.assessments.chat.storage.impl.ChatChannelStorageImpl;
 import gp.assessments.chat.utils.CommandUtils;
 import gp.assessments.chat.utils.Constants;

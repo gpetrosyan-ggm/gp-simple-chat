@@ -20,10 +20,6 @@ public enum CommandType {
         this.commandName = commandName;
     }
 
-    public String getCommandName() {
-        return commandName;
-    }
-
     public static Optional<CommandType> getByCommandName(final String commandName) {
         if (commandName.isBlank()) {
             return Optional.empty();
@@ -31,6 +27,10 @@ public enum CommandType {
         return Arrays.stream(CommandType.values())
                      .filter(p -> p.getCommandName().equals(commandName))
                      .findAny();
+    }
+
+    public String getCommandName() {
+        return commandName;
     }
 
 }

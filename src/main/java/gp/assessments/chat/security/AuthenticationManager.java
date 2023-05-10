@@ -1,6 +1,5 @@
 package gp.assessments.chat.security;
 
-import gp.assessments.chat.ChatApplication;
 import gp.assessments.chat.common.entity.UserEntity;
 import gp.assessments.chat.storage.impl.TokenStorageImpl;
 import gp.assessments.chat.storage.impl.UserStorageImpl;

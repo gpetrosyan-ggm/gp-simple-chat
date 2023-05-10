@@ -1,6 +1,5 @@
 package gp.assessments.chat.chat;
 
-import gp.assessments.chat.ChatApplication;
 import gp.assessments.chat.common.enums.CommandType;
 import gp.assessments.chat.common.factory.CommandFactory;
 import gp.assessments.chat.common.model.CommandMapperModel;

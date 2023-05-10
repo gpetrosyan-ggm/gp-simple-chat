@@ -4,10 +4,10 @@ import java.util.ResourceBundle;
 
 public final class PropertiesUtils {
 
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("application");
+
     private PropertiesUtils() {
     }
-
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("application");
 
     public static String getAsString(String propertyName) {
         return bundle.getString(propertyName);
