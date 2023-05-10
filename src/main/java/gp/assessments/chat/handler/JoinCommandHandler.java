@@ -5,6 +5,7 @@ import gp.assessments.chat.common.error.UserAlreadyJoinedChannelException;
 import gp.assessments.chat.storage.impl.ChatChannelStorageImpl;
 import gp.assessments.chat.utils.CommandUtils;
 import gp.assessments.chat.utils.Constants;
+import gp.assessments.chat.utils.PropertiesUtils;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,17 +31,16 @@ public class JoinCommandHandler implements CommandHandler<JoinCommand> {
             ChatChannelStorageImpl.getInstance().removeFromChannel(ctx.channel(), joinedChannelName, userName);
         }
 
-        ChatChannelStorageImpl.getInstance().addToChannel(ctx.channel(), command.getChannelName(), userName);
+        ChatChannelStorageImpl.getInstance()
+                              .addToChannel(ctx.channel(),
+                                            command.getChannelName(),
+                                            userName,
+                                            PropertiesUtils.getAsInt("channel.limit.size"));
 
         CommandUtils.setAttributeByName(ctx, Constants.CHANNEL_NAME_ATTR_NAME, command.getChannelName());
-        ctx.writeAndFlush(String.format("%s user joined to the the channel", userName));
 
-        // TODO check if user logged in or not, if not - send error message
-        // TODO check if user already joined to this channel , is yes - send error message
-        // TODO check if user has another joined channel, is yes - leave it out
-        // TODO check if client's limit exceeded, if yes - send error message
-        // TODO otherwise join channel and send last N messages
-
+        logger.info("The '{}' user successfully joined the '{}' channel.", userName, command.getChannelName());
+        ctx.writeAndFlush(PropertiesUtils.getAsString("join.command.success") + "\r\n");
     }
 
 }

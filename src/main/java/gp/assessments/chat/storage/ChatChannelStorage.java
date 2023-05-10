@@ -8,7 +8,7 @@ public interface ChatChannelStorage {
 
     void removeFromChannel(Channel channel, final String channelName, String userName);
 
-    void addToChannel(Channel channel, String channelName, String userName);
+    void addToChannel(Channel channel, String channelName, String userName, int channelLimit);
 
     void addMessageToChannel(String channelName, String userName, String message);
 

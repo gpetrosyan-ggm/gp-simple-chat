@@ -11,7 +11,8 @@ public enum ErrorType {
     INVALID_CHANNEL_ATTRIBUTE_NAME(1006, "invalid.channel.attribute.name.message"),
     INVALID_CHANNEL_NAME(1007, "invalid.channel.name.message"),
     USER_ALREADY_JOINED_CHANNEL(1008, "user.already.joined.channel.message"),
-    USER_INCORRECT_PASSWORD(1009, "user.incorrect.password.message");
+    USER_INCORRECT_PASSWORD(1009, "user.incorrect.password.message"),
+    USER_LIMIT_EXCEEDED(1010, "user.limit.exceeded.message");
 
     ErrorType(int errorCode, String errorCodeProp) {
         this.errorCode = errorCode;

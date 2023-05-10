@@ -3,6 +3,7 @@ package gp.assessments.chat.storage.impl;
 import gp.assessments.chat.common.entity.ChatChannelEntity;
 import gp.assessments.chat.common.entity.ChatMessageEntity;
 import gp.assessments.chat.common.error.InvalidChannelNameException;
+import gp.assessments.chat.common.error.UserLimitExceededException;
 import gp.assessments.chat.common.model.ChatChannelModel;
 import gp.assessments.chat.storage.ChatChannelStorage;
 import gp.assessments.chat.utils.PropertiesUtils;
@@ -32,27 +33,36 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
         ChatChannelModel chatChannelModel = chatChannelsMap.get(channelName);
         if (Objects.nonNull(chatChannelModel) && chatChannelModel.getUsers().remove(userName)) {
             chatChannelModel.getGroup().remove(channel);
+            chatChannelModel.getChannelLimitSemaphore().release();
         }
     }
 
     @Override
-    public void addToChannel(final Channel channel, final String channelName, final String userName) {
+    public void addToChannel(final Channel channel,
+                             final String channelName,
+                             final String userName,
+                             final int channelLimit) {
         chatChannelsMap.putIfAbsent(channelName,
-                                    new ChatChannelModel(new ChatChannelEntity(channelName, 10),
+                                    new ChatChannelModel(new ChatChannelEntity(channelName, channelLimit),
                                                          new DefaultChannelGroup(ImmediateEventExecutor.INSTANCE)));
 
         ChatChannelModel chatChannelModel = chatChannelsMap.get(channelName);
-        if (chatChannelModel.getUsers().addIfAbsent(userName)) {
+        if (!chatChannelModel.getUsers().contains(userName)) {
+            if (chatChannelModel.getChannelLimitSemaphore().tryAcquire()) {
+                if (chatChannelModel.getUsers().addIfAbsent(userName)) {
+                    chatChannelModel.getMessages().stream()
+                                    .sorted(Comparator.comparing(ChatMessageEntity::getSentDate).reversed())
+                                    .limit(PropertiesUtils.getAsInt("channel.messages.limit.size"))
+                                    .forEach(message -> channel.write(createMessageStr(message)));
+                    channel.flush();
 
-            chatChannelModel.getMessages().stream()
-                            .sorted(Comparator.comparing(ChatMessageEntity::getSentDate).reversed())
-                            .limit(PropertiesUtils.getAsInt("channel.messages.limit.size"))
-                            .forEach(message -> channel.write(String.format("[%s]: %s",
-                                                                            message.getSenderName(),
-                                                                            message.getMessage())));
-            channel.flush();
-
-            chatChannelModel.getGroup().add(channel);
+                    chatChannelModel.getGroup().add(channel);
+                } else {
+                    chatChannelModel.getChannelLimitSemaphore().release();
+                }
+            } else {
+                throw new UserLimitExceededException("User limit exceeded.");
+            }
         }
     }
 
@@ -64,8 +74,9 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
                                                                 channelName));
         }
 
-        chatChannelModel.getMessages().add(new ChatMessageEntity(message, userName, channelName));
-        chatChannelModel.getGroup().writeAndFlush(String.format("[%s]: %s", userName, message));
+        ChatMessageEntity chatMessage = new ChatMessageEntity(message, userName, channelName);
+        chatChannelModel.getMessages().add(chatMessage);
+        chatChannelModel.getGroup().writeAndFlush(createMessageStr(chatMessage));
     }
 
     @Override
@@ -80,6 +91,10 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
     @Override
     public Set<String> getChannel() {
         return new HashSet<>(chatChannelsMap.keySet());
+    }
+
+    private String createMessageStr(ChatMessageEntity message) {
+        return String.format("[%s][%s]: %s", message.getSentDate(), message.getSenderName(), message.getMessage());
     }
 
     private static class LoadChatStorage {

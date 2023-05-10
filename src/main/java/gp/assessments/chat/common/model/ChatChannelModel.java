@@ -6,6 +6,7 @@ import io.netty.channel.group.ChannelGroup;
 import lombok.Getter;
 
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Semaphore;
 
 @Getter
 public class ChatChannelModel {
@@ -14,12 +15,15 @@ public class ChatChannelModel {
     private final ChannelGroup group;
     private final CopyOnWriteArrayList<String> users;
     private final CopyOnWriteArrayList<ChatMessageEntity> messages;
+    private final Semaphore channelLimitSemaphore;
+
 
     public ChatChannelModel(ChatChannelEntity chatChannel, ChannelGroup group) {
         this.chatChannel = chatChannel;
         this.group = group;
         this.users = new CopyOnWriteArrayList<>();
         this.messages = new CopyOnWriteArrayList<>();
+        this.channelLimitSemaphore = new Semaphore(chatChannel.getChannelLimit());
     }
 
 }
