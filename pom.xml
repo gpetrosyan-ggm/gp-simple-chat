@@ -19,6 +19,8 @@
         <io.netty.version>4.1.92.Final</io.netty.version>
         <org.projectlombok.lombok.version>1.18.26</org.projectlombok.lombok.version>
         <io.jsonwebtoken.version>0.11.5</io.jsonwebtoken.version>
+        <org.slf4j.api.version>2.0.7</org.slf4j.api.version>
+        <ch.qos.logback.classic.version>1.4.7</ch.qos.logback.classic.version>
     </properties>
 
     <dependencies>
@@ -34,6 +36,18 @@
             <artifactId>lombok</artifactId>
             <version>${org.projectlombok.lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${ch.qos.logback.classic.version}</version>
         </dependency>
 
         <dependency>
