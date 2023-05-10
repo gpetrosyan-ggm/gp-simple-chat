@@ -10,6 +10,6 @@ public interface UserStorage {
 
     UserEntity save(UserEntity user);
 
-    void remove(final String userName);
+    void updateLastChannelName(String userName, String channelName);
 
 }

@@ -50,12 +50,6 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
         if (!chatChannelModel.getUsers().contains(userName)) {
             if (chatChannelModel.getChannelLimitSemaphore().tryAcquire()) {
                 if (chatChannelModel.getUsers().addIfAbsent(userName)) {
-                    chatChannelModel.getMessages().stream()
-                                    .sorted(Comparator.comparing(ChatMessageEntity::getSentDate).reversed())
-                                    .limit(PropertiesUtils.getAsInt("channel.messages.limit.size"))
-                                    .forEach(message -> channel.write(createMessageStr(message)));
-                    channel.flush();
-
                     chatChannelModel.getGroup().add(channel);
                 } else {
                     chatChannelModel.getChannelLimitSemaphore().release();
@@ -64,6 +58,12 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
                 throw new UserLimitExceededException("User limit exceeded.");
             }
         }
+
+        chatChannelModel.getMessages().stream()
+                        .sorted(Comparator.comparing(ChatMessageEntity::getSentDate).reversed())
+                        .limit(PropertiesUtils.getAsInt("channel.messages.limit.size"))
+                        .forEach(message -> channel.write(createMessageStr(message)));
+        channel.flush();
     }
 
     @Override
@@ -94,7 +94,11 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
     }
 
     private String createMessageStr(ChatMessageEntity message) {
-        return String.format("[%s][%s]: %s", message.getSentDate(), message.getSenderName(), message.getMessage());
+        return String.format("[%s][%s]: %s%s",
+                             message.getSentDate(),
+                             message.getSenderName(),
+                             message.getMessage(),
+                             "\r\n");
     }
 
     private static class LoadChatStorage {

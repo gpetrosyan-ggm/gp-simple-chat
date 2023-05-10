@@ -4,6 +4,7 @@ import gp.assessments.chat.command.DisconnectCommand;
 import gp.assessments.chat.security.AuthenticationManager;
 import gp.assessments.chat.utils.CommandUtils;
 import gp.assessments.chat.utils.Constants;
+import gp.assessments.chat.utils.PropertiesUtils;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +28,9 @@ public class DisconnectCommandHandler implements CommandHandler<DisconnectComman
 
         CommandUtils.setAttributeByName(ctx, Constants.CHANNEL_NAME_ATTR_NAME, null);
 
-        ctx.writeAndFlush("Successfully logout.");
+        logger.info("The '{}' user successfully disconnected from the chat.", userName);
+        ctx.writeAndFlush(PropertiesUtils.getAsString("disconnect.command.success") + "\r\n");
         ctx.channel().close();
-
-        // TODO check if user logged in or not, if not - send error message
-        // TODO Close connection to server.
-
     }
 
 }

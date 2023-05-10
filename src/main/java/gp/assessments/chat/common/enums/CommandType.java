@@ -1,6 +1,8 @@
 package gp.assessments.chat.common.enums;
 
 
+import gp.assessments.chat.utils.StringUtils;
+
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -21,7 +23,7 @@ public enum CommandType {
     }
 
     public static Optional<CommandType> getByCommandName(final String commandName) {
-        if (commandName.isBlank()) {
+        if (StringUtils.isBlank(commandName)) {
             return Optional.empty();
         }
         return Arrays.stream(CommandType.values())

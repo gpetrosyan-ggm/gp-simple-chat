@@ -28,10 +28,10 @@ public class UserStorageImpl implements UserStorage {
         return usersMap.get(user.getUserName());
     }
 
-    public void remove(final String userName) {
-        usersMap.remove(userName);
+    @Override
+    public void updateLastChannelName(final String userName, final String channelName) {
+        Optional.ofNullable(usersMap.get(userName)).ifPresent(user -> user.setLastChannelName(channelName));
     }
-
 
     private static class LoadUserStorage {
         static final UserStorage INSTANCE = new UserStorageImpl();

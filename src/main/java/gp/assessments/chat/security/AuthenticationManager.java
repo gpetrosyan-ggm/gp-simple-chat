@@ -38,10 +38,7 @@ public class AuthenticationManager {
     public void logout(final String userName, final String token) {
         logger.info("The user '{}' is logged out.", userName);
         Optional<UserEntity> userOpt = UserStorageImpl.getInstance().findByUserName(userName);
-        if (userOpt.isPresent()) {
-            userOpt.get().makeOffline();
-            UserStorageImpl.getInstance().remove(userName);
-        }
+        userOpt.ifPresent(UserEntity::makeOffline);
         TokenStorageImpl.getInstance().remove(token);
     }
 

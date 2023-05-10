@@ -17,10 +17,6 @@ public class MessageCommandHandler implements CommandHandler<MessageCommand> {
         String userName = CommandUtils.getAttributeByNameWithException(ctx, Constants.USER_NAME_ATTR_NAME);
         String channelName = CommandUtils.getAttributeByNameWithException(ctx, Constants.CHANNEL_NAME_ATTR_NAME);
         ChatChannelStorageImpl.getInstance().addMessageToChannel(channelName, userName, command.getMessage());
-
-        // TODO check if user logged in or not, if not - send error message
-        // TODO send message to current channel's all connected users
-
     }
 
 }

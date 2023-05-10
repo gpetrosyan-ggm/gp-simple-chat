@@ -3,6 +3,7 @@ package gp.assessments.chat.handler;
 import gp.assessments.chat.command.JoinCommand;
 import gp.assessments.chat.common.error.UserAlreadyJoinedChannelException;
 import gp.assessments.chat.storage.impl.ChatChannelStorageImpl;
+import gp.assessments.chat.storage.impl.UserStorageImpl;
 import gp.assessments.chat.utils.CommandUtils;
 import gp.assessments.chat.utils.Constants;
 import gp.assessments.chat.utils.PropertiesUtils;
@@ -36,7 +37,7 @@ public class JoinCommandHandler implements CommandHandler<JoinCommand> {
                                             command.getChannelName(),
                                             userName,
                                             PropertiesUtils.getAsInt("channel.limit.size"));
-
+        UserStorageImpl.getInstance().updateLastChannelName(userName, command.getChannelName());
         CommandUtils.setAttributeByName(ctx, Constants.CHANNEL_NAME_ATTR_NAME, command.getChannelName());
 
         logger.info("The '{}' user successfully joined the '{}' channel.", userName, command.getChannelName());

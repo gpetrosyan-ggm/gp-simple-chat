@@ -11,6 +11,7 @@ public class UserEntity {
     private final String id;
     private final String userName;
     private final String password;
+    private String lastChannelName;
     private final AtomicBoolean online;
 
     public UserEntity(String userName, String password) {
@@ -18,6 +19,11 @@ public class UserEntity {
         this.userName = userName;
         this.password = password;
         this.online = new AtomicBoolean(false);
+        lastChannelName = null;
+    }
+
+    public void setLastChannelName(String lastChannelName) {
+        this.lastChannelName = lastChannelName;
     }
 
     public void makeOnline() {
