@@ -1,14 +1,10 @@
 package gp.assessments.chat.handler;
 
-import gp.assessments.chat.command.JoinCommand;
 import gp.assessments.chat.command.LoginCommand;
 import gp.assessments.chat.common.entity.UserEntity;
 import gp.assessments.chat.security.AuthenticationManager;
-import gp.assessments.chat.storage.impl.ChatChannelStorageImpl;
 import gp.assessments.chat.storage.impl.UserStorageImpl;
 import gp.assessments.chat.utils.CommandUtils;
-import gp.assessments.chat.utils.Constants;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,14 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class LoginCommandTest {

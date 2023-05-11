@@ -1,8 +1,6 @@
 package gp.assessments.chat.handler;
 
-import gp.assessments.chat.command.ChannelsCommand;
 import gp.assessments.chat.command.LeaveCommand;
-import gp.assessments.chat.command.UsersCommand;
 import gp.assessments.chat.storage.impl.ChatChannelStorageImpl;
 import gp.assessments.chat.utils.CommandUtils;
 import gp.assessments.chat.utils.Constants;
@@ -18,7 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class LeaveCommandTest {

@@ -49,7 +49,7 @@ public class AuthenticationManager {
      * Make offline the user and removes the token from the storage
      *
      * @param userName logged in user name
-     * @param token logged in user token
+     * @param token    logged in user token
      */
     public void logout(final String userName, final String token) {
         logger.info("The user '{}' is logged out.", userName);

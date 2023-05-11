@@ -1,9 +1,7 @@
 package gp.assessments.chat.handler;
 
 import gp.assessments.chat.command.JoinCommand;
-import gp.assessments.chat.command.LeaveCommand;
 import gp.assessments.chat.common.error.UserAlreadyJoinedChannelException;
-import gp.assessments.chat.common.error.UserIncorrectPasswordException;
 import gp.assessments.chat.storage.impl.ChatChannelStorageImpl;
 import gp.assessments.chat.storage.impl.UserStorageImpl;
 import gp.assessments.chat.utils.CommandUtils;

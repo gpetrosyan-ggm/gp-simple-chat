@@ -1,11 +1,9 @@
 package gp.assessments.chat.handler;
 
-import gp.assessments.chat.command.DisconnectCommand;
 import gp.assessments.chat.command.MessageCommand;
 import gp.assessments.chat.storage.impl.ChatChannelStorageImpl;
 import gp.assessments.chat.utils.CommandUtils;
 import gp.assessments.chat.utils.Constants;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,9 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.HashSet;
-import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 

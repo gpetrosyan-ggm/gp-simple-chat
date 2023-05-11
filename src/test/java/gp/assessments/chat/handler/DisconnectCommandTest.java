@@ -1,7 +1,6 @@
 package gp.assessments.chat.handler;
 
 import gp.assessments.chat.command.DisconnectCommand;
-import gp.assessments.chat.security.AuthenticationManager;
 import gp.assessments.chat.utils.CommandUtils;
 import gp.assessments.chat.utils.Constants;
 import io.netty.channel.Channel;
@@ -17,7 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class DisconnectCommandTest {
