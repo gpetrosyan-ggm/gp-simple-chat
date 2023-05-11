@@ -1,5 +1,8 @@
 package gp.assessments.chat.utils;
 
+/**
+ * Utility class for constants
+ */
 public final class Constants {
 
     public static final String USER_ID_KEY = "user_id";

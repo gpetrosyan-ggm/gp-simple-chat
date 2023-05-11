@@ -5,6 +5,9 @@ import lombok.Getter;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * User entity model
+ */
 @Getter
 public class UserEntity {
 

@@ -13,6 +13,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+/**
+ * Join command handler
+ * Try to join a channel. If client's limit exceeded - send error,
+ * otherwise join channel and send last N messages of activity
+ */
 public class JoinCommandHandler implements CommandHandler<JoinCommand> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 

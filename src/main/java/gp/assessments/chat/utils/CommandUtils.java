@@ -6,6 +6,9 @@ import io.netty.util.AttributeKey;
 
 import java.util.Optional;
 
+/**
+ * Utility class for command-based operations, for instance, read/write attributes from/to channel context
+ */
 public final class CommandUtils {
 
     private CommandUtils() {

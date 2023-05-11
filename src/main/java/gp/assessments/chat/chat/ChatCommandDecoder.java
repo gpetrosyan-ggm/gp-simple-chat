@@ -17,6 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Transforms incoming messages to the custom Command object
+ */
 public class ChatCommandDecoder extends MessageToMessageDecoder<String> {
     private static final Logger logger = LoggerFactory.getLogger(ChatCommandDecoder.class);
 

@@ -2,6 +2,9 @@ package gp.assessments.chat.common.entity;
 
 import lombok.Getter;
 
+/**
+ * Token entity model
+ */
 @Getter
 public class TokenEntity {
 

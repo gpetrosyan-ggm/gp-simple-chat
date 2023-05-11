@@ -9,6 +9,9 @@ import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Leave command handler
+ */
 public class LeaveCommandHandler implements CommandHandler<LeaveCommand> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 

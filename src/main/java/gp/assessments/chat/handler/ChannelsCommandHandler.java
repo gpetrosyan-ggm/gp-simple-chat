@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
+/**
+ * Getting channels command handler
+ */
 public class ChannelsCommandHandler implements CommandHandler<ChannelsCommand> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 

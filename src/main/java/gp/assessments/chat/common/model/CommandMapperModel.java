@@ -5,6 +5,9 @@ import gp.assessments.chat.handler.CommandHandler;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Inbound command mapper model
+ */
 @Getter
 @RequiredArgsConstructor
 public class CommandMapperModel {

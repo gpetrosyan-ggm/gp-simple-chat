@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+/**
+ * Disconnect command handler
+ */
 public class DisconnectCommandHandler implements CommandHandler<DisconnectCommand> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 

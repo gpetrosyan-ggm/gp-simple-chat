@@ -6,6 +6,9 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Chat message entity model
+ */
 @Getter
 @Setter
 public class ChatMessageEntity {

@@ -9,6 +9,9 @@ import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
+/**
+ * Initializing chat server with some encoder(s), decoder(s) and handler(s)
+ */
 public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override

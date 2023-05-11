@@ -4,6 +4,9 @@ import gp.assessments.chat.common.error.InvalidLoginCommandParameterException;
 import gp.assessments.chat.utils.StringUtils;
 import lombok.Getter;
 
+/**
+ * Inbound login command model with possibility init 'userName' and 'password' parameters
+ */
 @Getter
 public class LoginCommand implements Command {
     private String userName;

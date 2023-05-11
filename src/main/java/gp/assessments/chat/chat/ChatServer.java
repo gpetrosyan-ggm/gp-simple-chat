@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 
 import java.net.InetSocketAddress;
 
+/**
+ * Chat server - set up and run a Netty-based chat server.
+ */
 @RequiredArgsConstructor
 public class ChatServer {
 

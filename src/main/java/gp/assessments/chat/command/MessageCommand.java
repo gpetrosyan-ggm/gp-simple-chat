@@ -4,6 +4,9 @@ import gp.assessments.chat.common.error.InvalidMessageCommandParameterException;
 import gp.assessments.chat.utils.StringUtils;
 import lombok.Getter;
 
+/**
+ * Inbound message command model with possibility init 'message' parameter
+ */
 @Getter
 public class MessageCommand implements Command {
     private String message;

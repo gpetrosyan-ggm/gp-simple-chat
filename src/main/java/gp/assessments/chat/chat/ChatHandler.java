@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
+/**
+ * Chat handler - handles inbound messages and trowed exceptions
+ */
 @RequiredArgsConstructor
 public class ChatHandler extends SimpleChannelInboundHandler<CommandMapperModel> {
     private static final Logger logger = LoggerFactory.getLogger(ChatHandler.class);

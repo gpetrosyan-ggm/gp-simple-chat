@@ -1,5 +1,8 @@
 package gp.assessments.chat.utils;
 
+/**
+ * Utility class for string-based operations
+ */
 public final class StringUtils {
 
     private StringUtils() {

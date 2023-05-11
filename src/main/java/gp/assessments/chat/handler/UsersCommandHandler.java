@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
+/**
+ * Getting channel's unique users command handler
+ */
 public class UsersCommandHandler implements CommandHandler<UsersCommand> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 

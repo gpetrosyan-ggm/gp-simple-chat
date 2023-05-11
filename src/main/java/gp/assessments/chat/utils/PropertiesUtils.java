@@ -2,6 +2,9 @@ package gp.assessments.chat.utils;
 
 import java.util.ResourceBundle;
 
+/**
+ * Utility class for reading properties from the resources
+ */
 public final class PropertiesUtils {
 
     private static final ResourceBundle bundle = ResourceBundle.getBundle("application");

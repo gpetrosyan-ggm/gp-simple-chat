@@ -8,6 +8,9 @@ import lombok.Getter;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Semaphore;
 
+/**
+ * Chat channel model
+ */
 @Getter
 public class ChatChannelModel {
 

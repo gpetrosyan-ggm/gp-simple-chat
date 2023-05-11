@@ -5,8 +5,18 @@ import gp.assessments.chat.common.enums.CommandType;
 import gp.assessments.chat.common.model.CommandMapperModel;
 import gp.assessments.chat.handler.*;
 
+/**
+ * Command factory to initialize command model
+ */
 public class CommandFactory {
 
+    /**
+     * Initializing command model based on the incoming command type
+     *
+     * @param commandType inbound command type
+     * @param params      inbound command parameters
+     * @return mapped command model based on the command type
+     */
     public CommandMapperModel getCommandMapperModel(final CommandType commandType, final String[] params) {
         return switch (commandType) {
             case LOGIN_COMMAND -> {

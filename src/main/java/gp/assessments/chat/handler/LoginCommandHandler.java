@@ -14,6 +14,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+/**
+ * Login command handler
+ * If the user doesn't exist, create profile else login,
+ * after login join to last connected channel
+ */
 public class LoginCommandHandler implements CommandHandler<LoginCommand> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 

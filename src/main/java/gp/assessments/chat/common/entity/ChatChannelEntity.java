@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+/**
+ * Chat channel entity model
+ */
 @Getter
 @Setter
 public class ChatChannelEntity {
