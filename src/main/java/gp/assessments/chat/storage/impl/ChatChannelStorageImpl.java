@@ -26,7 +26,7 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
     }
 
     public static ChatChannelStorage getInstance() {
-        return LoadChatStorage.INSTANCE;
+        return LoadChatChannelStorage.INSTANCE;
     }
 
     @Override
@@ -104,7 +104,7 @@ public class ChatChannelStorageImpl implements ChatChannelStorage {
                              "\r\n");
     }
 
-    private static class LoadChatStorage {
+    private static class LoadChatChannelStorage {
         static final ChatChannelStorage INSTANCE = new ChatChannelStorageImpl();
     }
 
